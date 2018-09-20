@@ -7,13 +7,16 @@
 typedef struct bstNode{
 	int data;
 	struct bstNode *lchild,*rchild;
-}*BSTree;
+}*BSTree,bstNode;
 
 //搜索排序树
 BSTree searchBST(BSTree t,int key);
 
 //向排序树插入结点
-void insertBST(BSTree t,int key);
+void insertBST(BSTree *t,int key);
 
 //删除关键字为key的结点
-void deleteBST(BSTree t,int key);
+void deleteBST(BSTree t,BSTree parent,int key);
+
+//构建排序树
+void CreateBST(BSTree *t);
