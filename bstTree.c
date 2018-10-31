@@ -72,6 +72,21 @@ BSTree searchBST(BSTree t,int key){
 	}
 }
 
+//搜索排序树
+int SearchBST_PRE(BSTree t,int key,BSTree parent,BSTree *result){
+	if( !t ){
+		*result = parent;
+		return 0;
+	}else if( LT(t->data, key) ){
+		return SearchBST_PRE(t->rchild, key, t, result);
+	}else if( GT(t->data, key) ){
+		return SearchBST_PRE(t->lchild, key, t, result);
+	}else if( QT(t->data, key) ){
+		*result = t;
+		return 1;
+	}
+}
+
 void insertBST(BSTree *t,int key){
 	if( *t == NULL ){
 		BSTree newNode = (BSTree)malloc(sizeof(bstNode));
@@ -89,6 +104,30 @@ void insertBST(BSTree *t,int key){
 			insertBST(&(temp->rchild),key);
 		}else if( GT(temp->data,key) ){
 			insertBST(&(temp->lchild),key);
+		}
+	}
+}
+
+//插入结点
+void InsertBST_NODE(BSTree *t,int key){
+	BSTree curRecord = NULL;
+	
+	if( !SearchBST_PRE( t, key, NULL, &curRecord) ){
+		BSTree newNode = (BSTree)malloc(sizeof(bstNode));
+		
+		if( newNode ){
+			newNode->data = key;
+			newNode->lchild = newNode->rchild = NULL;
+			
+			if( !curRecord ){
+				*t = newNode;
+			}else{
+				if( LT(curRecord->data, key) ){
+					curRecord->rchild = newNode;
+				}else if( GT(curRecord->data, key) ){
+					curRecord->lchild = newNode;
+				}
+			}
 		}
 	}
 }

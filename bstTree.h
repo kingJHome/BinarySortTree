@@ -12,8 +12,14 @@ typedef struct bstNode{
 //搜索排序树
 BSTree searchBST(BSTree t,int key);
 
+//搜索排序树
+int SearchBST_PRE(BSTree t,int key,BSTree parent,BSTree &result);
+
 //向排序树插入结点
 void insertBST(BSTree *t,int key);
+
+//插入结点
+void InsertBST_NODE(BSTree *t,int key);
 
 //删除关键字为key的结点
 void deleteBST(BSTree t,BSTree parent,int key);
